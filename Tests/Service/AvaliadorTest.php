@@ -10,6 +10,7 @@ use Alura\Leilao\Service\Avaliador;
 
 class AvaliadorTest extends TestCase
 {
+    /** @var Avaliador */
     private $leiloeiro;
 
     protected function setUp(): void
@@ -59,6 +60,14 @@ class AvaliadorTest extends TestCase
         $this->assertEquals(2500, $maiores[0]->getValor());
         $this->assertEquals(2000, $maiores[1]->getValor());
         $this->assertEquals(1700, $maiores[2]->getValor());
+    }
+
+    public function testLeilaoVazioNaoPodeSerAvaliado()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Não é possível avaliar leilão vazio');
+        $leilao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avalia($leilao);
     }
 
     public static function leilaoEmOrdemCrescente()
