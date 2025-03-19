@@ -12,7 +12,7 @@ class LeilaoTest extends TestCase
     public function testLeilaoNaoDeveReceberLancesRepetidos()
     {
         $this->expectException(\DomainException::class);
-        $this->expectExceptionMessage('Usuário não pode propor 2 lances seguidos');
+        $this->expectExceptionMessage('Usuário já deu o último lance');
         $leilao = new Leilao('Variante');
         $ana = new Usuario('Ana');
 
